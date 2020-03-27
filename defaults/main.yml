@@ -1,0 +1,8 @@
+# GUI tool GNOME, KDE
+os_gui: gnome
+
+# aliyun...
+os_cloud_agent: aliyun
+
+# vnc or remote
+os_connection: vnc
