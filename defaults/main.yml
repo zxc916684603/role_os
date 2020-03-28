@@ -2,7 +2,7 @@
 os_gui: True
 
 # aliyun
-os_cloud_agent: #aliyun
+os_cloud_agent: aliyun
 
 # vnc or remote
 os_connection: vnc
