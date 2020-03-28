@@ -1,3 +1,39 @@
-yum groupinstall -y "GNOME Desktop" 
-systemctl set-default graphical.target
-systemctl set-default graphical.target
+- block:
+  - name: Install Desktop
+    shell: yum groupinstall -y 'Server with GUI'
+
+  - name: Config Desktop
+    shell: |
+      systemctl set-default graphical.target
+      systemctl isolate graphical.target
+      systemctl get-default
+  when: os_gui
+
+- block: 
+  - name: Install VNC Server
+    yum:
+      name: [tigervnc-server,tigervnc-server-module]
+
+  - name: clean
+    shell: rm -rf /root/.vnc
+
+  - name: vnc password
+    expect:
+      command: vncserver
+      responses:
+        "password": "websoft9"
+        "Verify": "websoft9"
+        "view-only": "n"
+  
+  - name: vns service config
+    copy:
+      src: vncserver@:1.service
+      dest: /var/lib/systemd/system/
+
+  - name: VNC Server Start
+    service:
+      name: vncserver@:1.service
+      enabled: yes
+      state: started
+      
+  when: os_connection == 'vnc'
