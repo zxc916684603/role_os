@@ -1,4 +1,4 @@
-# GUI tool GNOME, KDE
+# Install default GUI
 os_gui: True
 
 # aliyun
