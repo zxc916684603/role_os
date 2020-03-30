@@ -29,7 +29,7 @@
   - name: vnc service config
     copy:
       src: vncserver.service
-      dest: /var/lib/systemd/system/vncserver@:1.service
+      dest: /etc/systemd/system/vncserver@:1.service
 
   - name: VNC Server Start
     service:
