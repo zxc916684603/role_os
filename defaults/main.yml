@@ -1,4 +1,4 @@
-# Install default GUI
+# Install default GUI, gnome,kde
 os_gui: gnome
 
 #azure, aws, aliyun, qcloud, huawei, alibabacloud, huaweicloud
