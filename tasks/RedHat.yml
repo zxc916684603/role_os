@@ -26,7 +26,7 @@
         "Verify": "websoft9"
         "view-only": "n"
   
-  - name: vns service config
+  - name: vnc service config
     copy:
       src: vncserver.service
       dest: /var/lib/systemd/system/vncserver@:1.service
