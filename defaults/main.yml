@@ -1,5 +1,5 @@
 # Install default GUI
-os_gui: True
+os_gui: gnome
 
 # aliyun
 os_cloud_agent: aliyun
