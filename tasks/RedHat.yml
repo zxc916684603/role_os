@@ -7,7 +7,7 @@
       systemctl set-default graphical.target
       systemctl isolate graphical.target
       systemctl get-default
-  when: os_gui
+  when: os_gui=="gnome"
 
 - block: 
   - name: Install VNC Server
