@@ -1,7 +1,7 @@
 # Install default GUI
 os_gui: gnome
 
-# aliyun
+#azure, aws, aliyun, qcloud, huawei, alibabacloud, huaweicloud
 os_cloud_agent: aliyun
 
 # vnc or remote
