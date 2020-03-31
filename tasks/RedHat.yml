@@ -1,9 +1,3 @@
-- name: Create a random password for VNC
-  set_fact: temp_password="{{ lookup('password', '/tmp/passwordfile length=8 chars=digits') }}"
-
-- name: delete tmp/passwordfile
-  shell: rm -rf /tmp/passwordfile
-  
 - block:
   - name: Install Desktop
     shell: yum groupinstall -y 'Server with GUI'
@@ -16,6 +10,12 @@
   when: os_gui=="gnome"
 
 - block: 
+  - name: Create a random password for VNC
+    set_fact: temp_password="{{ lookup('password', '/tmp/passwordfile length=8 chars=digits') }}"
+
+  - name: delete tmp/passwordfile
+    shell: rm -rf /tmp/passwordfile
+  
   - name: Install VNC Server
     yum:
       name: [tigervnc-server]
