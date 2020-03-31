@@ -12,7 +12,7 @@
 - block: 
   - name: Install VNC Server
     yum:
-      name: [tigervnc-server,tigervnc-server-module]
+      name: [tigervnc-server]
 
   - name: clean
     shell: rm -rf /root/.vnc
