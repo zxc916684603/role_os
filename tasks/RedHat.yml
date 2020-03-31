@@ -1,7 +1,6 @@
 - block:
   - name: Install Desktop
     shell: yum groupinstall -y 'Server with GUI'
-    ignore_errors: yes
 
   - name: Config Desktop
     shell: |
