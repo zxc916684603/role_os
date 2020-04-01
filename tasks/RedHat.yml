@@ -25,9 +25,9 @@
 
   - name: vnc password
     expect:
-      command: vncserver
+      command: vncpasswd
       responses:
-        "password": "{{temp_password}}"
+        "Password": "{{temp_password}}"
         "Verify": "{{temp_password}}"
         "view-only": "n"
   
