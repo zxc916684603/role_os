@@ -27,6 +27,9 @@
 - block: 
   - name: Create a random password for VNC
     set_fact: temp_password="{{ lookup('password', '/tmp/passwordfile length=8 chars=digits') }}"
+  
+  - debug:
+      msg: Testing VNC password is {{ temp_password }}
 
   - name: delete tmp/passwordfile
     shell: rm -rf /tmp/passwordfile
