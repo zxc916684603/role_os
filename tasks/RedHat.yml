@@ -13,7 +13,7 @@
 - block:
   - name: Install Desktop
     shell: |
-      yum groupinstall X Window System"
+      yum groupinstall "X Window System"
       yum groupinstall "KDE"
       startx
 
