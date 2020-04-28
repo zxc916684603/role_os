@@ -1,12 +1,9 @@
-- name: Install this role on {{ansible_os_family}}
+- name: Install Desktop on {{ansible_os_family}}
   include: "{{ansible_os_family}}.yml"
 
-- name: Install aliyun agent
-  shell: wget "https://aegis.alicdn.com/download/install/2.0/linux/AliAqsInstall_64.sh" && chmod +x AliAqsInstall_64.sh && ./AliAqsInstall_64.sh sJmepE
-  when: os_cloud_agent == 'aliyun'
+- name: Install VNC server and configure it
+  include: vnc.yml
+  when: os_connection == 'vnc'
 
-- name: Install Agent
-  shell: wget https://telescope-ap-southeast-1.obs.ap-southeast-1.myhuaweicloud.com/scripts/agentBatchPackage.sh && chmod 755 agentBatchPackage.sh && ./agentBatchPackage.sh
-  args:
-    chdir: /usr/local
-  when: os_cloud_agent == 'huaiwei'
+- name: Install Cloud agent
+  include: cloud_agent.yml

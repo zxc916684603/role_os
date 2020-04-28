@@ -1,0 +1,34 @@
+- name: Create a random password for VNC
+  set_fact: temp_password="{{ lookup('password', '/tmp/passwordfile length=8 chars=digits') }}"
+
+- debug:
+    msg: Testing VNC password is {{ temp_password }}
+
+- name: delete tmp/passwordfile
+  shell: rm -rf /tmp/passwordfile
+
+- name: Install VNC Server
+  yum:
+    name: [tigervnc-server]
+
+- name: clean
+  shell: rm -rf /root/.vnc
+
+- name: vnc password
+  expect:
+    command: vncpasswd
+    responses:
+      "Password": "{{temp_password}}"
+      "Verify": "{{temp_password}}"
+      "view-only": "n"
+
+- name: vnc service config
+  copy:
+    src: vncserver.service
+    dest: /lib/systemd/system/vncserver@.service
+
+- name: VNC Server Start
+  service:
+    name: vncserver@:1.service
+    enabled: yes
+    state: started
