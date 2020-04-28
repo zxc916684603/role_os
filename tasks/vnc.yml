@@ -2,12 +2,12 @@
   - name: Install VNC Server on {{ansible_os_family}}
     yum:
       name: [tigervnc-server]
-    when: {{ansible_os_family}} == "RedHat"
+    when: ansible_os_family == "RedHat"
 
   - name: Install VNC Server on {{ansible_os_family}}
     apt:
       name: [tigervnc-server]
-    when: {{ansible_os_family}} == "Debian"
+    when: ansible_os_family == "Debian"
 
 
 - name: Create a random password for VNC
