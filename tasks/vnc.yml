@@ -8,6 +8,7 @@
     apt:
       pkg:
         - tigervnc-standalone-server
+        - tigervnc-common
         - tigervnc-xorg-extension
     when: ansible_os_family == "Debian"
 
