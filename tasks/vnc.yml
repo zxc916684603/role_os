@@ -1,12 +1,14 @@
 - block:
   - name: Install VNC Server on {{ansible_os_family}}
     yum:
-      name: [tigervnc-server]
+      name: tigervnc-server
     when: ansible_os_family == "RedHat"
 
   - name: Install VNC Server on {{ansible_os_family}}
     apt:
-      name: [tigervnc-server]
+      pkg:
+        - tigervnc-standalone-server
+        - tigervnc-xorg-extension
     when: ansible_os_family == "Debian"
 
 
