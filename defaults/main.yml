@@ -1,8 +1,5 @@
 # Install default GUI, gnome,kde
 os_gui: gnome
 
-#azure, aws, aliyun, qcloud, huawei, alibabacloud, huaweicloud
-os_cloud_agent: aliyun
-
 # vnc or remote
 os_connection: vnc

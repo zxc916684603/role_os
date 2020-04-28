@@ -4,6 +4,3 @@
 - name: Install VNC server and configure it
   include: vnc.yml
   when: os_connection == 'vnc'
-
-- name: Install Cloud agent
-  include: cloud.yml

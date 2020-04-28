@@ -33,11 +33,12 @@ Ansible Role: OS
 
 | **Items**      | **Details** | **Format**  | **是否初始化** |
 | ------------------| ------------------|-----|-----|
-| os_applications | True, False | 布尔 | 否 |
+| os_gui | gnome,kde | 字符串 | 否 |
+| os_connection | vnc | 字符串 | 否 |
 
 注意： 
-1. ×××××××
-2. ×××××××
+
+1. os_connection 目前只支持vnc
 
 ## Example
 
