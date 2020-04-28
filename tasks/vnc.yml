@@ -1,3 +1,15 @@
+- block:
+  - name: Install VNC Server on {{ansible_os_family}}
+    yum:
+      name: [tigervnc-server]
+    when: {{ansible_os_family}} == "RedHat"
+
+  - name: Install VNC Server on {{ansible_os_family}}
+    apt:
+      name: [tigervnc-server]
+    when: {{ansible_os_family}} == "Debian"
+
+
 - name: Create a random password for VNC
   set_fact: temp_password="{{ lookup('password', '/tmp/passwordfile length=8 chars=digits') }}"
 
@@ -6,10 +18,6 @@
 
 - name: delete tmp/passwordfile
   shell: rm -rf /tmp/passwordfile
-
-- name: Install VNC Server
-  yum:
-    name: [tigervnc-server]
 
 - name: clean
   shell: rm -rf /root/.vnc
