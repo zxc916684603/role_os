@@ -1,7 +1,7 @@
 - name: Install GNOME Desktop
   shell: |
-    apt-get install -y gnome-shell ubuntu-gnome-desktop
-    apt-get install -y unity-tweak-tool gnome-tweak-tool
+    apt install -y gnome-shell ubuntu-gnome-desktop
+    apt install -y unity-tweak-tool gnome-tweak-tool
     pkg-reconfigure lightdm
   when: os_gui=="gnome"
 
