@@ -11,6 +11,11 @@
     tasksel install kubuntu-desktop
     apt install sddm
   when: os_gui=="kde"
+  
+- name: Install Xfce Desktop
+  shell: |
+    apt install -y xfce4 xfce4-goodies
+  when: os_gui=="xfce"
 
 - name: Config Desktop
   shell: |
