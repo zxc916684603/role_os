@@ -6,4 +6,4 @@
   when: os_connection == 'vnc'
 
 - name: Install Cloud agent
-  include: cloud_agent.yml
+  include: cloud.yml
