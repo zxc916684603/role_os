@@ -1,14 +1,17 @@
 [Unit]
-Description=Remote desktop service (VNC)
+Description=Start TightVNC server at startup
 After=syslog.target network.target
 
 [Service]
 Type=forking
+User=user
+Group=group
+WorkingDirectory=/home/user
 
-ExecStartPre=-/bin/sh -c '/usr/bin/vncserver -kill %i > /dev/null 2>&1 || :'
-ExecStart=-/usr/sbin/runuser -l root -c "/usr/bin/vncserver %i"
-PIDFile=-/root/.vnc/%H%i.pid
-ExecStop=-/bin/sh -c '/usr/bin/vncserver -kill %i > /dev/null 2>&1 || :'
+PIDFile=/home/user/.vnc/%H:1.pid
+ExecStartPre=-/usr/bin/vncserver -kill :* > /dev/null 2>&1
+ExecStart=/usr/bin/vncserve :1
+ExecStop=/usr/bin/vncserver -kill :1
 
 [Install]
 WantedBy=multi-user.target

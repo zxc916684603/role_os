@@ -36,10 +36,10 @@
 - name: vnc service config
   copy:
     src: vncserver.service
-    dest: /lib/systemd/system/vncserver@.service
+    dest: /lib/systemd/system/vncserver.service
 
 - name: VNC Server Start
   service:
-    name: vncserver@:1.service
+    name: vncserver
     enabled: yes
     state: started
