@@ -5,7 +5,7 @@ Linux 可视化可以从 Desktop 和 Web GUI 两个方案考量。不同的操�
 ### Desktop
 
 * Desktop: KDE, GNOME, 深度等
-* Server: VNCServer,RDP Server
+* Server: VNCServer,XDRP Server（依赖VNCServer）
 * 客户端：VNC和Windows远程桌面客户端
 
 最好可以支持两种客户端
