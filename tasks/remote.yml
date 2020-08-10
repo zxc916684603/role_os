@@ -1,14 +1,20 @@
 - block:
   - name: Install Remote tool on {{ansible_os_family}}
-    shell: |
-      yum install xrdp -y
-      systemctl start xrdp
-      systemctl enable xrdp
+    shell: yum install xrdp -y
     when: ansible_os_family == "RedHat"
 
-  - name: Install VNC Server on {{ansible_os_family}}
-    shell: |
-      apt install xrdp -y
-      systemctl start xrdp
-      systemctl enable xrdp
+  - name: Install Remote toolon {{ansible_os_family}}
+    shell: apt install xrdp -y
     when: ansible_os_family == "Debian"
+
+  - name: Start and enable xrdp
+    service:
+      name: xrdp
+      state: restarted
+      enabled: yes
+
+# check service state
+  - name: Check xrdp Service
+    shell: systemctl status xrdp | grep Active*
+    register: check_xrdp_service
+    notify: check_xrdp_service
