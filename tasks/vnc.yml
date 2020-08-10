@@ -16,8 +16,8 @@
   - debug:
       msg: Testing VNC password is {{ temp_password }}
 
-  - name: delete tmp/passwordfile
-    shell: rm -rf /tmp/passwordfile
+  #- name: delete tmp/passwordfile
+  #  shell: rm -rf /tmp/passwordfile
 
   - name: Configure vncserver password
     expect:
