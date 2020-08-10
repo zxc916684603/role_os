@@ -1,45 +1,58 @@
+# setting password for vncserver
 - block:
   - name: Install VNC Server on {{ansible_os_family}}
     yum:
       name: tigervnc-server
     when: ansible_os_family == "RedHat"
-
+  
   - name: Install VNC Server on {{ansible_os_family}}
     apt:
-      pkg:
-        - tigervnc-standalone-server
-        - tigervnc-common
-        - tigervnc-xorg-extension
+      name: tightvncserver
     when: ansible_os_family == "Debian"
 
+  - name: Create a random password for VNC
+    set_fact: temp_password="{{ lookup('password', '/tmp/passwordfile length=8 chars=digits') }}"
 
-- name: Create a random password for VNC
-  set_fact: temp_password="{{ lookup('password', '/tmp/passwordfile length=8 chars=digits') }}"
+  - debug:
+      msg: Testing VNC password is {{ temp_password }}
 
-- debug:
-    msg: Testing VNC password is {{ temp_password }}
+  - name: delete tmp/passwordfile
+    shell: rm -rf /tmp/passwordfile
 
-- name: delete tmp/passwordfile
-  shell: rm -rf /tmp/passwordfile
+  - name: Configure vncserver password
+    expect:
+      command: vncpasswd
+      responses:
+        "Password": "{{temp_password}}"
+        "Verify": "{{temp_password}}"
+        "view-only": "n"
 
-- name: clean
-  shell: rm -rf /root/.vnc
-
-- name: vnc password
-  expect:
-    command: vncpasswd
-    responses:
-      "Password": "{{temp_password}}"
-      "Verify": "{{temp_password}}"
-      "view-only": "n"
-
-- name: vnc service config
-  copy:
-    src: vncserver.service
+# vncserver configure
+- name: Copy vncserver.service(when system_user=root) 
+  template: 
+    src: vncserver.service1.j2
     dest: /lib/systemd/system/vncserver.service
+  when: ansible_user == "root"
 
-- name: VNC Server Start
+- name: Copy vncserver.service(when system_user=other) 
+  template: 
+    src: vncserver.service2.j2
+    dest: /lib/systemd/system/vncserver.service
+  when: ansible_user != "root"   
+
+- name: Restart vncserver
   service:
     name: vncserver
+    state: restarted
     enabled: yes
-    state: started
+
+# set soft link, -f enforce the exist links
+# ln -sf src des
+- name: set soft link
+  shell: ln -sf /lib/systemd/system/vncserver.service /lib/systemd/system/vnc.service
+    
+# check service state
+- name: Check vncserver Service
+  shell: systemctl status vncserver | grep Active*
+  register: check_vncserver_service
+  notify: check_vncserver_service
