@@ -1,0 +1,31 @@
+# install cockpit
+- name: Install cockpit
+  apt: 
+    name: [cockpit*]
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+
+- name: Install cockpit
+  yum:
+    name: [cockpit*]
+    update_cache: yes    
+  when: ansible_os_family == "RedHat"
+
+# configure
+- name: Configuration Cockpit Server
+  copy:
+    src: cockpit.conf
+    dest: /etc/cockpit/
+    owner: cockpit-ws
+    group: cockpit-ws
+    mode: 0640
+
+- name: Start & Enable cockpit
+  shell: |
+    systemctl restart cockpit
+    systemctl enable --now cockpit.socket 
+
+- name: Check cockpit Service
+  shell: systemctl status cockpit | grep Active*
+  register: check_cockpit_service
+  notify: check_cockpit_service

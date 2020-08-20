@@ -7,3 +7,7 @@
 - name: Install remote xrdp server 
   include: remote.yml
   when: os_connection == 'remote'
+
+- name: Install os_web
+  include: cockpit.yml
+  when: os_web
