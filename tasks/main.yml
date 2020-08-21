@@ -7,7 +7,7 @@
 
   - name: Install remote xrdp server 
     include: remote.yml
-  when: os_connection == 'remote'
+  when: os_gui is defined and os_gui is not none
 
 - name: Install Web GUI tool
   include: cockpit.yml
