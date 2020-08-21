@@ -1,5 +1,5 @@
 # Install default GUI, gnome,kde
-os_gui: gnome
+os_gui:
 
 # Install web gui
 os_webgui: cockpit
