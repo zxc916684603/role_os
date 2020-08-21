@@ -15,7 +15,7 @@
   lineinfile:
       dest: /usr/lib/systemd/system/cockpit.socket
       regexp: "ListenStream={{ os_cockpit_port }}"
-      line: "ListenStream={{cockpit_port}}"
+      line: "ListenStream={{os_cockpit_port}}"
       backrefs: yes 
 
 # configure
