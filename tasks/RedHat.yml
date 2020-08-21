@@ -13,3 +13,4 @@
     systemctl set-default graphical.target
     systemctl isolate graphical.target
     systemctl get-default
+  when: os_gui is defined and os_gui is not none
