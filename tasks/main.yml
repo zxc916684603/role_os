@@ -1,11 +1,12 @@
 - name: Install Desktop on {{ansible_os_family}}
   include: "{{ansible_os_family}}.yml"
 
-- name: Install VNC server and configure it
-  include: vnc.yml
+- block:
+  - name: Install VNC server and configure it
+    include: vnc.yml
 
-- name: Install remote xrdp server 
-  include: remote.yml
+  - name: Install remote xrdp server 
+    include: remote.yml
   when: os_connection == 'remote'
 
 - name: Install Web GUI tool
