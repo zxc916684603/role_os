@@ -5,5 +5,5 @@ os_gui: gnome
 os_connection: vnc
 
 os_web: True
-cockpit_port: 8090
+os_cockpit_port: 8090
 
