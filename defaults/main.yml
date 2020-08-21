@@ -6,5 +6,5 @@ os_webgui: cockpit
 
 # vnc or remote
 os_connection: vnc
-os_cockpit_port: 9099
+os_cockpit_port: "9099"
 
