@@ -8,6 +8,6 @@
   include: remote.yml
   when: os_connection == 'remote'
 
-- name: Install os_web
+- name: Install Web GUI tool
   include: cockpit.yml
   when: os_webgui == "cockpit"
