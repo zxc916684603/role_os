@@ -10,4 +10,4 @@
 
 - name: Install os_web
   include: cockpit.yml
-  when: os_web
+  when: os_webgui == "cockpit"
